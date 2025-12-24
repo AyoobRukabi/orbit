@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit - Solar System Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌌 Orbit - Solar System Simulator</h1>
+            <p class="subtitle">Interactive 3D Solar System Visualization</p>
+        </header>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <label for="speedControl">Speed:</label>
+                <input type="range" id="speedControl" min="0" max="5" step="0.1" value="1">
+                <span id="speedValue">1x</span>
+            </div>
+
+            <div class="control-group">
+                <label for="zoomControl">Zoom:</label>
+                <input type="range" id="zoomControl" min="0.5" max="3" step="0.1" value="1">
+                <span id="zoomValue">1x</span>
+            </div>
+
+            <div class="control-group">
+                <button id="pauseBtn" class="control-btn">⏸ Pause</button>
+                <button id="resetBtn" class="control-btn">🔄 Reset</button>
+                <button id="toggleOrbitsBtn" class="control-btn">👁 Toggle Orbits</button>
+                <button id="topViewBtn" class="control-btn">📐 Top View</button>
+            </div>
+        </div>
+
+        <div id="canvas-container"></div>
+
+        <div class="info-panel" id="infoPanel">
+            <h3 id="planetName">Click a planet to see details</h3>
+            <div id="planetDetails"></div>
+        </div>
+
+        <div class="planet-list">
+            <h3>Planets</h3>
+            <div id="planetButtons"></div>
+            <button id="createPlanetBtn" class="create-planet-btn">➕ Create New Planet</button>
+        </div>
+
+        <footer>
+            <p>Use mouse to drag and explore • Scroll to zoom • Click planets for info</p>
+        </footer>
+    </div>
+
+    <!-- Create Planet Modal -->
+    <div id="createPlanetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🪐 Create New Planet</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="planetNameInput">Planet Name:</label>
+                    <input type="text" id="planetNameInput" placeholder="e.g., MyPlanet" maxlength="20">
+                </div>
+
+                <div class="form-group">
+                    <label for="planetSizeInput">Size: <span id="sizeValue">10</span> km</label>
+                    <input type="range" id="planetSizeInput" min="4" max="25" value="10">
+                </div>
+
+                <div class="form-group">
+                    <label for="planetDistanceInput">Distance from Sun: <span id="distanceValue">250</span></label>
+                    <input type="range" id="planetDistanceInput" min="80" max="550" value="250">
+                </div>
+
+                <div class="form-group">
+                    <label for="planetSpeedInput">Orbital Speed: <span id="speedValuePlanet">0.01</span></label>
+                    <input type="range" id="planetSpeedInput" min="0.0001" max="0.05" step="0.0001" value="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>Planet Color:</label>
+                    <div class="color-picker">
+                        <input type="color" id="planetColorInput" value="#4a90e2">
+                        <span id="colorPreview"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="planetDescInput">Description (optional):</label>
+                    <textarea id="planetDescInput" rows="3" placeholder="Describe your planet..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelPlanetBtn" class="btn-secondary">Cancel</button>
+                <button id="addPlanetBtn" class="btn-primary">Create Planet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/solarSystem.js"></script>
+    <script src="js/planetManager.js"></script>
+    <script src="js/uiManager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
