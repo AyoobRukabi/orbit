@@ -111,8 +111,3 @@ The application uses `requestAnimationFrame` for smooth 60 FPS animations and is
 
 Free to use and modify!
 
-## Credits
-
-Created with ❤️ by Claude
-
-Enjoy exploring the solar system! 🚀✨
