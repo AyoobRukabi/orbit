@@ -140,7 +140,6 @@ class PlanetManager {
     updatePositions(speed) {
         this.planets.forEach(planet => {
             planet.angle += planet.speed * speed;
-            // Keep angle in range [0, 2π]
             if (planet.angle > Math.PI * 2) {
                 planet.angle -= Math.PI * 2;
             }
@@ -149,39 +148,24 @@ class PlanetManager {
     
     resetPositions() {
         const initialAngles = [
-            0,
-            Math.PI / 4,
-            Math.PI / 2,
-            Math.PI,
-            3 * Math.PI / 2,
-            Math.PI / 6,
-            2 * Math.PI / 3,
-            5 * Math.PI / 4
+            0, Math.PI / 4, Math.PI / 2, Math.PI, 
+            3 * Math.PI / 2, Math.PI / 6, 2 * Math.PI / 3, 5 * Math.PI / 4
         ];
         
         this.planets.forEach((planet, index) => {
-            planet.angle = initialAngles[index];
+            planet.angle = initialAngles[index] || 0;
         });
     }
     
-    getPlanets() {
-        return this.planets;
-    }
+    getPlanets() { return this.planets; }
     
-    getPlanetByName(name) {
-        return this.planets.find(p => p.name === name);
-    }
+    getPlanetByName(name) { return this.planets.find(p => p.name === name); }
     
-    selectPlanet(planet) {
-        this.selectedPlanet = planet;
-    }
+    selectPlanet(planet) { this.selectedPlanet = planet; }
     
-    getSelectedPlanet() {
-        return this.selectedPlanet;
-    }
+    getSelectedPlanet() { return this.selectedPlanet; }
     
     addCustomPlanet(config) {
-        // Parse color from hex
         const hex = config.color.replace('#', '');
         const r = parseInt(hex.substr(0, 2), 16);
         const g = parseInt(hex.substr(2, 2), 16);
@@ -192,7 +176,7 @@ class PlanetManager {
             distance: config.distance,
             size: config.size,
             speed: config.speed,
-            angle: Math.random() * Math.PI * 2, // Random starting position
+            angle: Math.random() * Math.PI * 2,
             color: { r, g, b },
             info: {
                 diameter: `${config.size * 1000} km`,
@@ -205,7 +189,6 @@ class PlanetManager {
             isCustom: true
         };
         
-        // Add to planets array in the correct position (sorted by distance)
         let insertIndex = this.planets.length;
         for (let i = 0; i < this.planets.length; i++) {
             if (this.planets[i].distance > config.distance) {
