@@ -1,3 +1,6 @@
+/* =========================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +23,9 @@ body {
     gap: 15px;
 }
 
+/* =========================================
+   2. HEADER
+   ========================================= */
 header {
     text-align: center;
     padding: 15px;
@@ -34,7 +40,6 @@ header h1 {
     background: linear-gradient(45deg, #4a90e2, #7b68ee, #ff6b9d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 5px;
 }
 
@@ -43,6 +48,9 @@ header h1 {
     font-size: 0.9em;
 }
 
+/* =========================================
+   3. CONTROLS PANEL
+   ========================================= */
 .controls-panel {
     display: flex;
     justify-content: center;
@@ -66,6 +74,7 @@ header h1 {
     color: #b0b0b0;
 }
 
+/* Custom Range Slider Styles */
 input[type="range"] {
     width: 150px;
     height: 6px;
@@ -73,12 +82,10 @@ input[type="range"] {
     background: rgba(255, 255, 255, 0.1);
     outline: none;
     -webkit-appearance: none;
-    appearance: none;
 }
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -105,6 +112,7 @@ input[type="range"]::-moz-range-thumb:hover {
     transform: scale(1.2);
 }
 
+/* Control Buttons */
 .control-btn {
     padding: 10px 20px;
     background: linear-gradient(45deg, #4a90e2, #7b68ee);
@@ -126,6 +134,9 @@ input[type="range"]::-moz-range-thumb:hover {
     transform: translateY(0);
 }
 
+/* =========================================
+   4. CANVAS CONTAINER
+   ========================================= */
 #canvas-container {
     flex: 1;
     position: relative;
@@ -147,6 +158,9 @@ input[type="range"]::-moz-range-thumb:hover {
     cursor: grabbing;
 }
 
+/* =========================================
+   5. INFO PANEL (Floating)
+   ========================================= */
 .info-panel {
     position: fixed;
     top: 120px;
@@ -188,6 +202,9 @@ input[type="range"]::-moz-range-thumb:hover {
     color: #e0e0e0;
 }
 
+/* =========================================
+   6. PLANET LIST (Side Panel)
+   ========================================= */
 .planet-list {
     position: fixed;
     bottom: 80px;
@@ -226,7 +243,6 @@ input[type="range"]::-moz-range-thumb:hover {
 
 .planet-btn:hover {
     background: rgba(74, 144, 226, 0.2);
-    border-color: #4a90e2;
     transform: translateX(5px);
 }
 
@@ -246,7 +262,6 @@ input[type="range"]::-moz-range-thumb:hover {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    font-size: 0.95em;
 }
 
 .create-planet-btn:hover {
@@ -254,7 +269,9 @@ input[type="range"]::-moz-range-thumb:hover {
     box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
 }
 
-/* Modal Styles */
+/* =========================================
+   7. MODAL STYLES
+   ========================================= */
 .modal {
     display: none;
     position: fixed;
@@ -316,7 +333,6 @@ input[type="range"]::-moz-range-thumb:hover {
     background: linear-gradient(45deg, #4a90e2, #7b68ee);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .modal-close {
@@ -325,21 +341,16 @@ input[type="range"]::-moz-range-thumb:hover {
     color: #a0a0a0;
     font-size: 2em;
     cursor: pointer;
-    transition: color 0.3s;
-    line-height: 1;
-    padding: 0;
     width: 30px;
     height: 30px;
-}
-
-.modal-close:hover {
-    color: #ff6b9d;
+    line-height: 1;
 }
 
 .modal-body {
     padding: 25px;
 }
 
+/* Form Groups within Modal */
 .form-group {
     margin-bottom: 20px;
 }
@@ -359,16 +370,6 @@ input[type="range"]::-moz-range-thumb:hover {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     color: #e0e0e0;
-    font-size: 1em;
-    font-family: inherit;
-    transition: all 0.3s;
-}
-
-.form-group input[type="text"]:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4a90e2;
-    background: rgba(74, 144, 226, 0.1);
 }
 
 .form-group input[type="range"] {
@@ -386,8 +387,8 @@ input[type="range"]::-moz-range-thumb:hover {
     height: 40px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    cursor: pointer;
     background: transparent;
+    cursor: pointer;
 }
 
 #colorPreview {
@@ -405,37 +406,29 @@ input[type="range"]::-moz-range-thumb:hover {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.btn-primary,
-.btn-secondary {
+.btn-primary {
     padding: 12px 24px;
+    background: linear-gradient(45deg, #4a90e2, #7b68ee);
+    color: white;
     border: none;
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
-    font-size: 0.95em;
-}
-
-.btn-primary {
-    background: linear-gradient(45deg, #4a90e2, #7b68ee);
-    color: white;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
 }
 
 .btn-secondary {
+    padding: 12px 24px;
     background: rgba(255, 255, 255, 0.05);
     color: #e0e0e0;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
+/* =========================================
+   8. FOOTER
+   ========================================= */
 footer {
     text-align: center;
     padding: 10px;
@@ -445,66 +438,18 @@ footer {
     color: #a0a0a0;
 }
 
-/* Responsive design */
+/* =========================================
+   9. RESPONSIVE DESIGN
+   ========================================= */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 1.8em;
-    }
-    
     .controls-panel {
         flex-direction: column;
-        gap: 15px;
     }
-
-    .info-panel {
-        width: calc(100% - 40px);
-        right: 20px;
-        top: auto;
-        bottom: 100px;
-    }
-
+    
+    .info-panel,
     .planet-list {
         width: calc(100% - 40px);
         left: 20px;
-        bottom: 20px;
-    }
-
-    #planetButtons {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    
-    .planet-btn {
-        font-size: 0.8em;
-        padding: 6px 12px;
-    }
-    
-    .modal-content {
-        width: 95%;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-        gap: 10px;
-    }
-    
-    header h1 {
-        font-size: 1.5em;
-    }
-    
-    .subtitle {
-        font-size: 0.8em;
-    }
-    
-    .control-group {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
-    
-    input[type="range"] {
-        width: 100%;
+        right: 20px;
     }
 }
