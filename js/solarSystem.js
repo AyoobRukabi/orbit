@@ -112,7 +112,6 @@ class SolarSystem {
                 });
                 const moonMesh = new THREE.Mesh(moonGeo, moonMat);
                 moonMesh.position.set(moonData.distance, 0, 0); 
-                
                 moonPivot.add(moonMesh);
                 planetGroup.add(moonPivot);
                 planetGroup.userData.moons.push({ pivot: moonPivot, data: moonData });
@@ -195,15 +194,27 @@ class SolarSystem {
     render(planets) {
         this.planetMeshes.forEach((group, index) => {
             const data = planets[index];
+            // Always update position (rendering)
             group.position.x = Math.cos(data.angle) * data.distance;
             group.position.z = Math.sin(data.angle) * data.distance;
-            group.userData.mesh.rotation.y += 0.01;
-
-            if(group.userData.moons && data.moons) {
-                group.userData.moons.forEach((moonObj, mIndex) => {
-                    const mData = data.moons[mIndex];
-                    if(mData) moonObj.pivot.rotation.y = mData.angle || 0;
-                });
+            
+            // Only rotate/animate moons if NOT paused
+            if (!this.isPaused) {
+                group.userData.mesh.rotation.y += 0.01;
+                if(group.userData.moons && data.moons) {
+                    group.userData.moons.forEach((moonObj, mIndex) => {
+                        const mData = data.moons[mIndex];
+                        if(mData) moonObj.pivot.rotation.y = mData.angle || 0;
+                    });
+                }
+            } else {
+                // If paused, just sync the visual rotation state to data
+                if(group.userData.moons && data.moons) {
+                    group.userData.moons.forEach((moonObj, mIndex) => {
+                        const mData = data.moons[mIndex];
+                        if(mData) moonObj.pivot.rotation.y = mData.angle || 0;
+                    });
+                }
             }
         });
         
@@ -215,7 +226,15 @@ class SolarSystem {
         return { hoveredPlanet: h };
     }
     
-    start(cb) { const loop = () => { if (!this.isPaused) cb(); this.animationFrame = requestAnimationFrame(loop); }; loop(); }
+    start(renderCallback) { 
+        const animate = () => { 
+            // Removed check "if (!this.isPaused)" so loop always runs
+            renderCallback(); 
+            this.animationFrame = requestAnimationFrame(animate); 
+        }; 
+        animate(); 
+    }
+    
     pause() { this.isPaused = true; }
     resume() { this.isPaused = false; }
     stop() { cancelAnimationFrame(this.animationFrame); }

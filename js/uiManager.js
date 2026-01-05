@@ -57,6 +57,7 @@ class UIManager {
         this.elements.planetDistanceInput.addEventListener('input', (e) => this.elements.distanceValue.textContent = e.target.value);
         this.elements.planetSpeedInput.addEventListener('input', (e) => this.elements.speedValuePlanet.textContent = parseFloat(e.target.value).toFixed(4));
         this.elements.planetColorInput.addEventListener('input', (e) => this.elements.colorPreview.style.background = e.target.value);
+        this.elements.colorPreview.style.background = this.elements.planetColorInput.value;
         this.elements.createPlanetBtn.addEventListener('click', () => { this.isEditing = false; this.showModal("Create New Planet", "Save Planet"); });
         this.elements.closeModal.addEventListener('click', () => this.hideModal());
         this.elements.cancelPlanetBtn.addEventListener('click', () => this.hideModal());

@@ -331,6 +331,7 @@ input[type="range"]::-moz-range-thumb:hover {
     margin: 0;
     font-size: 1.5em;
     background: linear-gradient(45deg, #4a90e2, #7b68ee);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

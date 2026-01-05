@@ -92,7 +92,11 @@ class OrbitApp {
     
     startAnimation() {
         this.solarSystem.start(() => {
-            this.planetManager.updatePositions(this.solarSystem.speed);
+            // ONLY move planets if not paused
+            if (!this.solarSystem.isPaused) {
+                this.planetManager.updatePositions(this.solarSystem.speed);
+            }
+            // ALWAYS render the scene (fixes Zoom/Hover while paused)
             const renderData = this.solarSystem.render(this.planetManager.getPlanets());
             
             if (!this.uiManager.isEditing) {
@@ -105,9 +109,6 @@ class OrbitApp {
                 } else {
                     if (this.currentHoveredPlanetName !== null) {
                         this.currentHoveredPlanetName = null;
-                        // Don't auto-hide if a modal is open or button clicked, but hovering off generally hides info
-                        // We keep info if clicked, but hover overrides it. 
-                        // To keep it simple per requirements: Hover reveals info.
                         this.uiManager.hidePlanetInfo();
                     }
                 }
